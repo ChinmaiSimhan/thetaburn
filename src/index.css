@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Design tokens ─────────────────────────────────────────────────────────── */
+:root {
+  --accent: #00e5a0;
+  --accent-dim: #00c47a;
+  --danger: #ff3b5c;
+  --surface: #0d1117;
+  --card: #111827;
+  --border: rgba(255, 255, 255, 0.07);
+}
+
+/* ── Base ──────────────────────────────────────────────────────────────────── */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: #07090c;
+  color: #f0f4f8;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Custom scrollbar ──────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+::-webkit-scrollbar-thumb {
+  background: #374151;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4b5563;
+}
+
+/* ── Range slider base ─────────────────────────────────────────────────────── */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+input[type='range']:hover {
+  opacity: 1;
+}
+
+/* Webkit thumb */
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #07090c;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 229, 160, 0.5);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+
+input[type='range']::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 14px rgba(0, 229, 160, 0.7);
+}
+
+/* Firefox thumb */
+input[type='range']::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid #07090c;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(0, 229, 160, 0.5);
+}
+
+input[type='range'].slider-danger::-webkit-slider-thumb {
+  background: var(--danger);
+  box-shadow: 0 0 8px rgba(255, 59, 92, 0.5);
+}
+
+input[type='range'].slider-danger::-moz-range-thumb {
+  background: var(--danger);
+  box-shadow: 0 0 8px rgba(255, 59, 92, 0.5);
+}
+
+/* ── Glass card ────────────────────────────────────────────────────────────── */
+@layer components {
+  .glass-card {
+    @apply rounded-2xl border;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border-color: var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-200;
+  }
+
+  .glass-card-hover:hover {
+    border-color: rgba(0, 229, 160, 0.2);
+    background: linear-gradient(135deg, rgba(0, 229, 160, 0.04) 0%, rgba(255, 255, 255, 0.01) 100%);
+  }
+
+  .label-mono {
+    @apply font-mono text-xs tracking-wider uppercase;
+    color: #6b7280;
+  }
+
+  .value-mono {
+    @apply font-mono font-bold;
+  }
+
+  .greek-positive {
+    color: #00e5a0;
+  }
+
+  .greek-negative {
+    color: #ff3b5c;
+  }
+}
+
+/* ── Hero grid background ──────────────────────────────────────────────────── */
+.hero-grid {
+  background-image: linear-gradient(rgba(0, 229, 160, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 160, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ── Animated gradient text ────────────────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #00e5a0 0%, #38bdf8 50%, #a78bfa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Number animation ──────────────────────────────────────────────────────── */
+.num-animate {
+  animation: numPop 0.25s ease-out;
+}
+
+@keyframes numPop {
+  0%   { transform: scale(1.1); opacity: 0.6; }
+  100% { transform: scale(1);   opacity: 1;   }
+}
+
+/* ── Toggle button ─────────────────────────────────────────────────────────── */
+.toggle-btn {
+  @apply px-4 py-2 rounded-xl text-sm font-medium font-body transition-all duration-200 cursor-pointer border;
+  border-color: var(--border);
+  color: #6b7280;
+  background: transparent;
+}
+
+.toggle-btn.active-green {
+  background: rgba(0, 229, 160, 0.15);
+  border-color: rgba(0, 229, 160, 0.4);
+  color: #00e5a0;
+  box-shadow: 0 0 12px rgba(0, 229, 160, 0.1);
+}
+
+.toggle-btn.active-red {
+  background: rgba(255, 59, 92, 0.15);
+  border-color: rgba(255, 59, 92, 0.4);
+  color: #ff3b5c;
+  box-shadow: 0 0 12px rgba(255, 59, 92, 0.1);
+}
+
+.toggle-btn.active-blue {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
+}
+
+.toggle-btn.active-orange {
+  background: rgba(251, 146, 60, 0.15);
+  border-color: rgba(251, 146, 60, 0.4);
+  color: #fb923c;
+}
+
+/* ── Quick sim button ──────────────────────────────────────────────────────── */
+.sim-btn {
+  @apply rounded-xl py-2 px-3 text-xs font-mono font-bold transition-all duration-200 cursor-pointer border;
+  border-color: var(--border);
+  color: #9ca3af;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sim-btn:hover {
+  background: rgba(0, 229, 160, 0.08);
+  border-color: rgba(0, 229, 160, 0.3);
+  color: #00e5a0;
+  transform: translateY(-1px);
+}
+
+.sim-btn:active {
+  transform: translateY(0);
+}
